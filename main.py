@@ -33,19 +33,15 @@ while games_is_on:
         scoreboard.increase_score()
 
     if snake.head.xcor() > 280 or snake.head.xcor() < -280 or snake.head.ycor() > 280 or snake.head.ycor() < -280:
-        games_is_on = False
-        scoreboard.game_over()
+        print("OUT")
+        scoreboard.reset()
+        snake.reset()
 
     # Detect colision with tail
     # If head colides with any segment in the head
     #     trigger game over
-    for segment in snake.segments:
-        if segment == snake.head:
-            pass
-        elif snake.head.distance(segment) < 10:
-            games_is_on = False
-            scoreboard.game_over()
-
-
+    for segment in snake.segments[1:]:
+        if snake.head.distance(segment) < 10:
+            scoreboard.reset()
 
 screen.exitonclick()
